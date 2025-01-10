@@ -1,0 +1,122 @@
+[gd_scene load_steps=14 format=3 uid="uid://055kbasajo2p"]
+
+[ext_resource type="Script" path="res://scripts/pipes.gd" id="1_ej7vh"]
+[ext_resource type="Texture2D" uid="uid://dinxjwo7pi166" path="res://art/Tiles/Style 1/pipes.png" id="2_ry5ao"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixp0e"]
+atlas = ExtResource("2_ry5ao")
+region = Rect2(0, 64, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aiadj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixp0e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mot0n"]
+size = Vector2(32.3085, 74.0408)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6dnp"]
+atlas = ExtResource("2_ry5ao")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6s77"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6dnp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovvp8"]
+atlas = ExtResource("2_ry5ao")
+region = Rect2(0, 128, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pae20"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovvp8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlurj"]
+size = Vector2(31.3889, 128.333)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bshyo"]
+atlas = ExtResource("2_ry5ao")
+region = Rect2(0, 192, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vdlqn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bshyo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v6tl"]
+size = Vector2(40, 392)
+
+[node name="pipes" type="Node2D"]
+script = ExtResource("1_ej7vh")
+
+[node name="top" type="Area2D" parent="."]
+position = Vector2(248, 103)
+scale = Vector2(1.8, 1.8)
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="top"]
+position = Vector2(29, 39)
+sprite_frames = SubResource("SpriteFrames_aiadj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
+position = Vector2(28.8889, 8.23771)
+rotation = -3.14159
+scale = Vector2(0.979551, -1.70819)
+shape = SubResource("RectangleShape2D_mot0n")
+disabled = true
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="top"]
+position = Vector2(28.8235, -24.7059)
+sprite_frames = SubResource("SpriteFrames_o6s77")
+
+[node name="bottom" type="Area2D" parent="."]
+position = Vector2(300, 377)
+scale = Vector2(1.8, 1.8)
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bottom"]
+sprite_frames = SubResource("SpriteFrames_pae20")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bottom"]
+position = Vector2(0.138885, 32.5)
+shape = SubResource("RectangleShape2D_vlurj")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="bottom"]
+position = Vector2(0, 64.1177)
+sprite_frames = SubResource("SpriteFrames_vdlqn")
+
+[node name="scored" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scored"]
+position = Vector2(356, 284)
+shape = SubResource("RectangleShape2D_7v6tl")
+
+[connection signal="body_entered" from="top" to="." method="_on_top_body_entered"]
+[connection signal="body_entered" from="bottom" to="." method="_on_bottom_body_entered"]
+[connection signal="body_entered" from="scored" to="." method="_on_scored_body_entered"]

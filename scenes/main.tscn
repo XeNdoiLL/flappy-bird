@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cisy8yipf2ui3"]
+
+[ext_resource type="PackedScene" uid="uid://bl8tpjmu4yoj" path="res://scenes/bird.tscn" id="1_bdglp"]
+[ext_resource type="Texture2D" uid="uid://bmwqmeiuglcuv" path="res://Background1.tres" id="1_pxrqc"]
+[ext_resource type="Script" path="res://scripts/pipespawner.gd" id="1_x1557"]
+
+[node name="main" type="Node"]
+
+[node name="pipespawner" type="Node" parent="."]
+script = ExtResource("1_x1557")
+
+[node name="Timer" type="Timer" parent="pipespawner"]
+wait_time = 2.5
+autostart = true
+
+[node name="background" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2.14809, 2.14993)
+texture = ExtResource("1_pxrqc")
+stretch_mode = 4
+
+[node name="bird" parent="." instance=ExtResource("1_bdglp")]
+position = Vector2(154, 258)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(278, 278)
